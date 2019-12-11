@@ -35,7 +35,7 @@ public class TinderApp {
         handler.addFilter(SessionFilter.class, "/messages/{id}", EnumSet.of(DispatcherType.REQUEST));
         handler.addFilter(SessionFilter.class, "/users", EnumSet.of(DispatcherType.REQUEST));
         handler.addFilter(MessageFilter.class, "/messages/{id}", EnumSet.of(DispatcherType.REQUEST));
-    ----------------------------
+    //----------------------------
         handler.addServlet((new ServletHolder(new LoginServlet(engine,loginService))), "/login");
         handler.addServlet((new ServletHolder(new RegistrationServlet(engine,new RegisterService(daoUser)))), "/register");
         handler.addServlet((new ServletHolder(new LikeServlet(engine,likeService))), "/liked");
