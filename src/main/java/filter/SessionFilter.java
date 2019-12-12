@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SessionFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig){
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -19,8 +19,9 @@ public class SessionFilter implements Filter {
         HttpSession session = req.getSession();
         if (session.getAttribute("user") == null) {
             resp.sendRedirect("/login");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
