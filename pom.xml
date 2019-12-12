@@ -10,7 +10,6 @@
 
     <build>
         <plugins>
-            <!-- Java 8 source and target settings -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -20,22 +19,15 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            <!-- Copy dependencies to `${project.build.directory}/deps` -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/deps
-                            </outputDirectory>
-                        </configuration>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
                     </execution>
                 </executions>
             </plugin>
