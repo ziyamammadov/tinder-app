@@ -44,7 +44,13 @@ public class TinderApp {
         handler.addServlet(ErrorServlet.class, "/*");
 //        ----------------------------------------------------------------------
 
-        Server server = new Server(5000);
+        int port;
+        try {
+            port = Integer.parseInt(System.getenv("PORT"));
+        } catch (NumberFormatException ex) {
+            port = 5000;
+        }
+        Server server = new Server(port);
         server.setHandler(handler);
         server.start();
         server.join();
