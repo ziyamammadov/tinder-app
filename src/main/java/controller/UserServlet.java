@@ -27,8 +27,9 @@ public class UserServlet extends HttpServlet {
         HashMap<String, Object> data = new HashMap<>();
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        if (service.getUserToDisplay(user) != null) {
-            User selected = service.getUserToDisplay(user);
+        User selected = service.getUserToDisplay(user);
+        if (selected != null) {
+            System.out.println("get");
             data.put("image_url", selected.getPictureUrl());
             data.put("name", selected.getName());
             engine.render("like-page.ftl", data, resp);
@@ -39,20 +40,19 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HashMap<String, Object> data = new HashMap<>();
         String button = req.getParameter("button");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         User selected = service.getUserToDisplay(user);
+        System.out.println("post");
         if (button.equals("dislike") && selected != null) {
             service.addDislike(new Dislike(user.getId(), selected.getId()));
+            resp.sendRedirect("/users");
         } else if (button.equals("like") && selected != null) {
             service.addLike(new Like(user.getId(), selected.getId()));
+            resp.sendRedirect("/users");
         } else {
             resp.sendRedirect("/liked");
         }
-        data.put("image_url", selected.getPictureUrl());
-        data.put("name", selected.getName());
-        engine.render("like-page.ftl", data, resp);
     }
 }

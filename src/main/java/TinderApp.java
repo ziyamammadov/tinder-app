@@ -44,7 +44,7 @@ public class TinderApp {
         handler.addServlet(ErrorServlet.class, "/*");
 //        ----------------------------------------------------------------------
 
-        Server server = new Server(9002);
+        Server server = new Server(5000);
         server.setHandler(handler);
         server.start();
         server.join();
